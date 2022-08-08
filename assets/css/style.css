@@ -1,0 +1,50 @@
+body {
+    background-color: #102F3E;
+    color: #FFFF;
+    font-size: 133%;
+    text-shadow: 1px 1px black;
+}
+
+a {
+    color: #4B8CAD;
+}
+
+a:hover {
+    color: #B3DABF;
+}
+
+.timerContainer {
+    float: right;
+}
+
+/* mainContent div contains the quiz title and description on index.html. This class also contains
+    the questions and answers on the mainQuiz html page. */
+.mainContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.mainContent h1 {
+    margin-bottom: 30px;
+    font-size: 200%;
+    text-shadow: 4px 4px black;
+}
+.mainContent img {
+    height: auto;
+    max-width: 300px;
+}
+
+.uiButton {
+    text-shadow: none;
+    background-color: #B3DABF;
+    padding: 10px;
+    border: 4px;
+    border-style: outset;
+    border-color: #B3DABF;
+}
+
+.uiButton:hover {
+    color: white;
+}
