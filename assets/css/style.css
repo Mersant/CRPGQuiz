@@ -35,9 +35,27 @@ a:hover {
     height: auto;
     max-width: 300px;
 }
+.mainContent li {
+    margin-bottom: 5px; /* Prevents cursor highlighting answers it's not hovering over */
+    border: 3px;
+    border-color: #B3DABF;
+    /* Intentionally no border style, it will appear when the answer is selected. (See script.js) */
+    text-align: left;
+}
+.mainContent li:hover {
+    cursor: grab;
+    text-decoration: underline;
+    color: #B3DABF;
+}
+.mainContent li:active {
+    cursor: grabbing;
+}
 
-.uiButton {
+#uiButton {
     text-shadow: none;
+    color: #4B8CAD;
+    text-decoration: underline;
+    font-size: 110%;
     background-color: #B3DABF;
     padding: 10px;
     border: 4px;
@@ -45,6 +63,36 @@ a:hover {
     border-color: #B3DABF;
 }
 
-.uiButton:hover {
+#uiButton:hover {
     color: white;
+    cursor: grab;
+}
+
+#uiButton:active {
+    border-style: inset;
+}
+
+#quizImage {
+    height: auto;
+    max-width: 500px;
+    border: 5px;
+    border-style: outset;
+    border-color: #102F3E;
+}
+
+#answerFactoid {
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px;
+    text-align: center;
+
+    background-color: #102F3E;
+    color: white;
+
+    border: 10px;
+    border-style: double;
+    border-color: #4B8CAD;
 }
