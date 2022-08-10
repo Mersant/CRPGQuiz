@@ -1,24 +1,31 @@
+:root {
+    --dark-blue: #102F3E;
+    --light-blue: #4B8CAD;
+    --light-green: #B3DABF;
+}
+
 body {
-    background-color: #102F3E;
-    color: #FFFF;
+    background-color: var(--dark-blue);
+    color: white;
     font-size: 133%;
     text-shadow: 1px 1px black;
 }
 
 a {
-    color: #4B8CAD;
+    color: var(--light-blue);
 }
 
 a:hover {
-    color: #B3DABF;
+    color: var(--light-green);
 }
 
+/* Timer is now on the top-right of screen */
 .timerContainer {
     float: right;
 }
 
 /* mainContent div contains the quiz title and description on index.html. This class also contains
-    the questions and answers on the mainQuiz html page. */
+    the questions and answers on the mainQuiz.html page. */
 .mainContent {
     position: absolute;
     top: 50%;
@@ -38,29 +45,29 @@ a:hover {
 .mainContent li {
     margin-bottom: 5px; /* Prevents cursor highlighting answers it's not hovering over */
     border: 3px;
-    border-color: #B3DABF;
+    border-color: var(--light-green);
     /* Intentionally no border style, it will appear when the answer is selected. (See script.js) */
     text-align: left;
 }
 .mainContent li:hover {
     cursor: grab;
     text-decoration: underline;
-    color: #B3DABF;
+    color: var(--light-green);
 }
 .mainContent li:active {
     cursor: grabbing;
 }
-
+/* uiButton is a general purpose ID used for the next question button on mainQuiz.html, Submit button on highscores.html and the Begin Quiz button on index.html.*/
 #uiButton {
     text-shadow: none;
-    color: #4B8CAD;
+    color: var(--light-blue);
     text-decoration: underline;
     font-size: 110%;
-    background-color: #B3DABF;
+    background-color: var(--light-green);
     padding: 10px;
     border: 4px;
     border-style: outset;
-    border-color: #B3DABF;
+    border-color: var(--light-green);
 }
 
 #uiButton:hover {
@@ -77,9 +84,9 @@ a:hover {
     max-width: 500px;
     border: 5px;
     border-style: outset;
-    border-color: #102F3E;
+    border-color: var(--dark-blue);
 }
-
+/* answerFactoid is a box that appears after the user has selected an answer. It contains a factoid about the question they just answered and a button to move on to the next question. */
 #answerFactoid {
     position: absolute;
     display: none;
@@ -89,10 +96,10 @@ a:hover {
     padding: 50px;
     text-align: center;
 
-    background-color: #102F3E;
+    background-color: var(--dark-blue);
     color: white;
 
     border: 10px;
     border-style: double;
-    border-color: #4B8CAD;
+    border-color: var(--light-blue);
 }

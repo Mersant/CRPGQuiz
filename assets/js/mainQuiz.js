@@ -128,11 +128,22 @@ function adjustTime(time = -1) {
     if(!pauseGame) {
         timeLeft += time;
         document.getElementById('timeLeft').textContent = timeLeft;
+
+        // Game over if timer is out
+        if(timeLeft <= 0) {
+            // Save the user's score so it can be displayed on the next page.
+            localStorage.setItem('score', '0, since you ran out of time.'); // Using 0 prevents negative scores
+            // Additionally, create a starter high scores list for the highscore page to display.
+            if(!localStorage.getItem('scoreList')) {
+                var starterScores = ["Billy - 9,999","Ron - 256"];
+                localStorage.setItem("scoreList", JSON.stringify(starterScores));
+            }
+            window.location.assign('./highscores.html');
+        }
     }
 }
 
 function populateScreen() {
-    // Main game 
     document.getElementById('quizImage').src = images[currentQuestion];
     document.getElementById('quizQuestion').textContent = questions[currentQuestion];
 
@@ -147,7 +158,7 @@ function populateScreen() {
     document.getElementById('answer' + index[0]).addEventListener('click', () => {
         selectAnswer(true);
     });
-    // All other indeces correspond to an incorrect answer
+    // All other indices correspond to an incorrect answer
     for(i = 1; i<=3; i++) {
 
         document.getElementById('answer' + index[i]).textContent = wrongAnswers[3*currentQuestion + i-1];
@@ -176,13 +187,14 @@ document.getElementById('uiButton').addEventListener("click", () => {
         document.getElementById('answerFactoid').style.display = 'none';
         pauseGame = false;
     } else {
+        // Save the user's score so it can be displayed on the next page.
         localStorage.setItem('score', timeLeft);
-        window.location.assign('./highscores.html');
         // Additionally, create a starter high scores list for the highscore page to display.
         if(!localStorage.getItem('scoreList')) {
             var starterScores = ["Billy - 9,999","Ron - 256"];
             localStorage.setItem("scoreList", JSON.stringify(starterScores));
         }
+        window.location.assign('./highscores.html');
     }
 });
 
