@@ -143,14 +143,14 @@ function populateScreen() {
     index = [1,2,3,4].sort( () => .5 - Math.random() ); // Index now contains 0,1,2,3 in a randomized order
 
     // 0th element of index is always used to contain the right answer
-    document.getElementById('answer' + index[0]).textContent = correctAnswers[currentQuestion] + 'C'
+    document.getElementById('answer' + index[0]).textContent = correctAnswers[currentQuestion];
     document.getElementById('answer' + index[0]).addEventListener('click', () => {
         selectAnswer(true);
     });
     // All other indeces correspond to an incorrect answer
     for(i = 1; i<=3; i++) {
 
-        document.getElementById('answer' + index[i]).textContent = wrongAnswers[3*currentQuestion + i-1] + 'W';
+        document.getElementById('answer' + index[i]).textContent = wrongAnswers[3*currentQuestion + i-1];
         document.getElementById('answer' + index[i]).addEventListener('click', () => {
             selectAnswer(false);
         });
@@ -180,8 +180,8 @@ document.getElementById('uiButton').addEventListener("click", () => {
         window.location.assign('./highscores.html');
         // Additionally, create a starter high scores list for the highscore page to display.
         if(!localStorage.getItem('scoreList')) {
-            var scores = ["Billy - 9,999","Ron - 256"];
-            localStorage.setItem("scoreList", JSON.stringify(scores));
+            var starterScores = ["Billy - 9,999","Ron - 256"];
+            localStorage.setItem("scoreList", JSON.stringify(starterScores));
         }
     }
 });
