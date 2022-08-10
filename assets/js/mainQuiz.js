@@ -1,4 +1,5 @@
 
+// ------------------------------------ QUIZ TEXT DATA ---------------------------------------
 var questions = [
     'What was the first 3D RPG?', // 1
     'Just how big was The Elder Scrolls Arena\'s map?', // 2
@@ -114,28 +115,45 @@ var images = [
     './assets/images/Question11.jpg'
 ]
 
+// -------------------------------------- MAIN QUIZ CODE -------------------------------------------------
+
 // Set up quiz page
 var currentQuestion = 0;
+var timeLeft = 60;
+var pauseGame = false;
+
+setInterval(adjustTime, 1000);
+
+function adjustTime(time = -1) {
+    if(!pauseGame) {
+        timeLeft += time;
+        document.getElementById('timeLeft').textContent = timeLeft;
+    }
+}
 
 function populateScreen() {
     // Main game 
     document.getElementById('quizImage').src = images[currentQuestion];
     document.getElementById('quizQuestion').textContent = questions[currentQuestion];
 
+    // It's slow but it clears all of the previous event listeners attached to the li elements.
+    document.querySelector('ul').outerHTML = document.querySelector('ul').outerHTML;
+
     // Populate answers
     index = [1,2,3,4].sort( () => .5 - Math.random() ); // Index now contains 0,1,2,3 in a randomized order
 
-    document.getElementById('answer' + index[0]).textContent = correctAnswers[currentQuestion]
-    document.getElementById('answer' + index[0]).addEventListener("click", () => {
+    // 0th element of index is always used to contain the right answer
+    document.getElementById('answer' + index[0]).textContent = correctAnswers[currentQuestion] + 'C'
+    document.getElementById('answer' + index[0]).addEventListener('click', () => {
         selectAnswer(true);
-    })
-
+    });
+    // All other indeces correspond to an incorrect answer
     for(i = 1; i<=3; i++) {
-        document.getElementById('answer' + index[i]).textContent = wrongAnswers[3*currentQuestion + i-1];
-        document.getElementById('answer' + index[i]).addEventListener("click", () => {
+
+        document.getElementById('answer' + index[i]).textContent = wrongAnswers[3*currentQuestion + i-1] + 'W';
+        document.getElementById('answer' + index[i]).addEventListener('click', () => {
             selectAnswer(false);
-        })
-        
+        });
     }
 }
 populateScreen();
@@ -144,19 +162,30 @@ function selectAnswer(isCorrect) {
     document.getElementById('answerFactoid').style.display = 'block';
     if(isCorrect) {
         document.getElementById('factoidText').textContent = "Correct! " + factoids[currentQuestion];
-    } else {
+    } else if(!isCorrect) {
         document.getElementById('factoidText').textContent = "Incorrect! " + factoids[currentQuestion];
+        timeLeft -= 10;
+        document.getElementById('timeLeft').textContent = timeLeft;
     }
-
+    pauseGame = true; // This pauses the timer so the user can read the factoid
 }
 document.getElementById('uiButton').addEventListener("click", () => {
-    console.log("oof");
     currentQuestion++;
     if(currentQuestion <= 10) {
         populateScreen();
         document.getElementById('answerFactoid').style.display = 'none';
+        pauseGame = false;
     } else {
+        localStorage.setItem('score', timeLeft);
         window.location.assign('./highscores.html');
+        // Additionally, create a starter high scores list for the highscore page to display.
+        if(!localStorage.getItem('scoreList')) {
+            var scores = ["Billy - 9,999","Ron - 256"];
+            localStorage.setItem("scoreList", JSON.stringify(scores));
+        }
     }
-})
+});
+
+
+
 

@@ -10,23 +10,21 @@
 </head>
 <body>
     <a class='highScoresLink' href="./index.html">Go back to home page</a>
-    
-    <div class='timerContainer'>
-        Time Left: 60
-    </div>
 
     <div class='mainContent'>
         <img src="https://i.gifer.com/XcFC.gif">
-        <h1>That's it!</h1>
+        <h1>That's it! You scored <span id='highscore'>0! Play the game first!</span></h1>
         <h2>High scores:</h2>
         <p>
             <ul id='scoreList'>
-                <li>1. </li>
             </ul><br><br>
-            Enter your name below to add it to the score list:
-            <input type="text" id="nameBox" value="Your initials"><br>
+            Type your initials to add them to the score list:
+            <input type="text" id="nameBox"><br><br><br>
+            <button type='button' id='uiButton'>Submit</button>
         </p>
     </div>
+
+    <script type="text/javascript" src="./assets/js/highscores.js"></script>
 
 </body>
 </html>
